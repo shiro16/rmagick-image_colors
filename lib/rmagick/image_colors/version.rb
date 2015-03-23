@@ -1,5 +1,5 @@
-module Rmagick
-  module ImageColors
-    VERSION = "0.1.0"
+module Magick
+  class ImageColors
+    VERSION = "0.0.1"
   end
 end

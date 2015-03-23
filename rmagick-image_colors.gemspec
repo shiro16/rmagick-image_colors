@@ -5,7 +5,7 @@ require 'rmagick/image_colors/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "rmagick-image_colors"
-  spec.version       = Rmagick::ImageColors::VERSION
+  spec.version       = Magick::ImageColors::VERSION
   spec.authors       = ["TODO: Write your name"]
   spec.email         = ["TODO: Write your email address"]
 
@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
   end
 
+  spec.add_dependency 'rmagick', '~> 2.13.2'
   spec.add_development_dependency "bundler", "~> 1.8"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
