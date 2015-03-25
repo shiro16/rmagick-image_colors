@@ -15,8 +15,9 @@ module Magick
     private
     def aggregate
       colors = {}
+      depth = @image.depth
       @image.color_histogram.each do |pixel|
-        color = pixel[0].to_color(Magick::AllCompliance, false, @image.depth, true)
+        color = pixel[0].to_color(Magick::AllCompliance, false, depth, true)
         colors[color] ||= 0
         colors[color] += pixel[1]
       end
