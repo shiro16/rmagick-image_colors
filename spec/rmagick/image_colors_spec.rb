@@ -14,6 +14,13 @@ describe Magick::ImageColors do
     end
 
     it { subject }
+
+    context 'when argment Magick::Image class' do
+      let(:image) { Magick::Image.read('spec/fixtures/test.jpg').first }
+      let(:image_colors) { Magick::ImageColors.new(image: image) }
+
+      it { subject }
+    end
   end
 
   describe '#colors' do
@@ -32,8 +39,19 @@ describe Magick::ImageColors do
 
       it { expect(subject.size).to eq(3) }
       it { expect(subject[0]).to eq(['#9AAEC9', 5]) }
-      it { expect(subject[1]).to eq(['#9DAEC8', 4]) }
-      it { expect(subject[2]).to eq(['#FDFDFD', 4]) }
+      it { expect(subject[1]).to eq(['#FDFDFD', 4]) }
+      it { expect(subject[2]).to eq(['#9DAEC8', 4]) }
+
+      context 'when argment block given' do
+        subject do
+          image_colors.send(:aggregate) do |pixel|
+            "#FFFFFF"
+          end
+        end
+
+        it { expect(subject.size).to eq(1) }
+        it { expect(subject[0]).to eq(['#FFFFFF', 2500]) }
+      end
     end
   end
 end
