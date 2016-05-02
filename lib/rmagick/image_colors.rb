@@ -27,7 +27,7 @@ module Magick
                             pixel[0].to_color(Magick::AllCompliance, false, depth, true)
                           end
 
-                  next if color.nil?
+                  next colors if color.nil?
 
                   colors[color] ||= 0
                   colors[color] += pixel[1]
