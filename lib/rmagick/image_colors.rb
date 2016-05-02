@@ -19,18 +19,20 @@ module Magick
 
     private
     def aggregate(&block)
-      colors = {}
       depth = @image.depth
-      @image.color_histogram.each do |pixel|
-        if block_given?
-          color = block.call(pixel)
-        else
-          color = pixel[0].to_color(Magick::AllCompliance, false, depth, true)
-        end
-        colors[color] ||= 0
-        colors[color] += pixel[1]
-      end
-      @colors = colors.sort{|a, b| b[1] <=> a[1]}
+      @colors = @image.color_histogram.inject({}) do |colors, pixel|
+                  color = if block_given?
+                            block.call(pixel, depth)
+                          else
+                            pixel[0].to_color(Magick::AllCompliance, false, depth, true)
+                          end
+
+                  next if color.nil?
+
+                  colors[color] ||= 0
+                  colors[color] += pixel[1]
+                  colors
+                end.sort{|a, b| b[1] <=> a[1]}
     end
   end
 end
