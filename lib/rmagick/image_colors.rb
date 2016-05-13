@@ -1,4 +1,4 @@
-require 'RMagick'
+require 'rmagick'
 require 'rmagick/image_colors/version'
 
 module Magick
